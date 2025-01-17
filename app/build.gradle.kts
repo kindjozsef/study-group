@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "ro.msgromania.ckad"
-version = "0.0.1-SNAPSHOT"
+version = ""
 
 java {
 	toolchain {
