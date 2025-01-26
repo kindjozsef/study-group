@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+spec:
+  containers:
+    - image: nginx
+      name: nginxcontainer
+    - image: agentx
+      name: agentxcontainer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simpleapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simpleapp
+  template:
+    metadata:
+      labels:
+        app: simpleapp
+    spec:
+      containers:
+        - image: busybox
+          name: simpleapp
+          command: ["sh", "-c", "sleep 3600"]
