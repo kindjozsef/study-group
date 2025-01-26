@@ -29,7 +29,7 @@
 # Tasks with replicasets
 
 1. How many ReplicaSets exist on the system?
-2. Execute `kubectl create -f 002_setup.yaml`.
+2. Execute `kubectl create -f 002_setup_rs.yaml`.
 3. How many PODs are DESIRED in the new-replica-set?
 4. What image is used in the replicaset?
 5. How many PODs are READY in the new-replica-set?

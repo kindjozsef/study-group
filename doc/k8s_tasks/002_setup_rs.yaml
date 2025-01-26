@@ -1,0 +1,19 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: new-replica-set
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: new-replica-set
+  template:
+    metadata:
+      labels:
+        app: new-replica-set
+    spec:
+      containers:
+        - image: busybox777
+          name: busyboxcontainer
+          command: ["sh", "-c", "sleep 3600"]
