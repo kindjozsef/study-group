@@ -32,7 +32,9 @@
 
 1. How many Deployments exist on the system?
 2. How many ReplicaSets exist on the system?
-3. How many PODs exist on the system now?
+3. How many PODs exist on the system?
+4. Execute `kubectl create -f 003_setup_dep.yaml`.
+5. How many Deployments, ReplicaSets and PODs exists on the system now?
 4. Out of all the existing PODs, how many are ready?
 5. What is the image used to create the pods in the new deployment?
 6. Why do you think the deployment is not ready?
@@ -40,7 +42,7 @@
    - Deployment was not created correctly
    - Application has errors
    - Kubernetes is faulty
-7. Create a new Deployment using the deployment-definition-1.yaml file located at /root/.
+7. Create a new Deployment using the deployment-definition-1.yaml file located at /k8s_tasks/.
    There is an issue with the file, so try to fix it.
 8. Create a new Deployment with the below attributes using your own deployment definition file.
    - Name: httpd-frontend;

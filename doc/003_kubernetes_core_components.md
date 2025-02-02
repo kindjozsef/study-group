@@ -11,11 +11,25 @@ We can use it for Load balancing and scaling
 Why are the labels important?
 ![image info](./assets/k8s_rs_labels.png)
 
+### Commands
+```yaml
+# List all replicasets
+kubectl get replicaset
+# List all replicasets (short form)
+kubectl get rs
+# Get informations about a replicaset
+kubectl describe replicaset <REPLICASET_NAME>
+# Get informations about a replicaset (short form)
+kubectl describe rs <REPLICASET_NAME>
+# Scale a replicaset (either down or up)
+kubectl scale rs <REPLICASET_NAME> --replicas=<COUNT>
+```
+
 ### Deploying replica sets
 
 #### Using yaml files
 
-```yaml
+```shell
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -47,6 +61,9 @@ The deployment resource provides both rolling update and rollback capabilities.
 
 ![image info](./assets/k8s_deployment_example.png)
 
+### Rolling Update
+![image info](./assets/k8s_rolling_update.png)
+
 ### Deploying deployments
 
 #### Using yaml files
@@ -69,6 +86,25 @@ spec:
           image: <imagename>
 ```
 
+#### Using imperative command
+```shell
+kubectl create deployment <DEPLOYMENT_NAME> --image=<IMAGE_NAME> --replicas=<REPLICA_COUNT>
+```
+
+### Commands
+```shell
+# List all deployments
+kubectl get deployment
+# List all deployments (short form)
+kubectl get deploy
+# Get informations about a deployment
+kubectl describe deployment <DEPLOYMENT_NAME>
+# Get informations about a deploy (short form)
+kubectl describe deploy <DEPLOYMENT_NAME>
+# Scale a deployment (either down or up)
+kubectl scale deployment <DEPLOYMENT_NAME> --replicas=<COUNT>
+```
+
 ## Namespaces
 
 There is a default namespace called `default`.\
@@ -88,6 +124,10 @@ kubectl get pods
 kubectl get pods --namespace=<my-namespace>
 # create a namespace
 kubectl create namespace <my-namespace>
+# List all pods (or any other resources) in all namespaces
+kubectl get pods --all-namespaces
+# List all pods (or any other resources) in all namespaces (short form)
+kubectl get pods -A
 ```
 
 #### Using yaml files

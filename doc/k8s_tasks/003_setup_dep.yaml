@@ -1,0 +1,19 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: new-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: new-deployment
+  template:
+    metadata:
+      labels:
+        app: new-deployment
+    spec:
+      containers:
+        - image: busybox888
+          name: busyboxcontainer
+          command: ["sh", "-c", "sleep 3600"]
