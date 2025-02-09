@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-netpol
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+  namespace: test-netpol
+spec:
+  containers:
+    - image: nginx
+      name: nginxcontainer
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+  labels:
+    app: backend
+  namespace: test-netpol
+spec:
+  containers:
+    - image: nginx
+      name: nginxcontainer
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db
+  labels:
+    app: db
+  namespace: test-netpol
+spec:
+  containers:
+    - image: nginx
+      name: nginxcontainer
+---
+
