@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-svc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-pod-svc-ns
+  namespace: test-svc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: example-pod-svc-ns
+  template:
+    metadata:
+      labels:
+        app: example-pod-svc-ns
+    spec:
+      containers:
+        - image: nginx
+          name: nginx

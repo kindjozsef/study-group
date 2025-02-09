@@ -1,0 +1,18 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-pod-svc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: example-pod-svc
+  template:
+    metadata:
+      labels:
+        app: example-pod-svc
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
