@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp-ok
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demoapp-ok
+  template:
+    metadata:
+      labels:
+        app: demoapp-ok
+    spec:
+      containers:
+        - image: kindjozsef/demoapp:latest
+          name: demoapp
+          readinessProbe:
+            initialDelaySeconds: 15
+            httpGet:
+              port: 8080
+              path: "/ready"
+          livenessProbe:
+            initialDelaySeconds: 15
+            httpGet:
+              port: 8080
+              path: "/live"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demoapp-ok
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: demoapp-ok

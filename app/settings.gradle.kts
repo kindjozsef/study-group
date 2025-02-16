@@ -1,1 +1,1 @@
-rootProject.name = "dummycontroller"
+rootProject.name = "demoapplication"

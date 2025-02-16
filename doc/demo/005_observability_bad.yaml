@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp-bad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demoapp-bad
+  template:
+    metadata:
+      labels:
+        app: demoapp-bad
+    spec:
+      containers:
+        - image: kindjozsef/demoapp:latest
+          name: demoapp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demoapp-bad
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: demoapp-bad
