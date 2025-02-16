@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-logs-1
+spec:
+  containers:
+    - image: kodekloud/event-simulator
+      name: test-logs-1
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-logs-2
+spec:
+  containers:
+    - image: kodekloud/event-simulator
+      name: test-logs-2
+      env:
+        - name: OVERRIDE_USER
+          value: USER30

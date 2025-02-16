@@ -15,3 +15,32 @@ spec:
           echo "while true; do curl -s -f \$1 && echo || echo "Error"; sleep 1; done" >> /tmp/script.sh
           chmod +x /tmp/script.sh
           sleep 3600
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demoapp
+  template:
+    metadata:
+      labels:
+        app: demoapp
+    spec:
+      containers:
+        - image: kindjozsef/demoapp:latest
+          name: demoapp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demoapp
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: demoapp

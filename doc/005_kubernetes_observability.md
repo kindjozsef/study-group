@@ -4,19 +4,19 @@
 
 ### POD Status
 
-- Pending: when the scheduler tries to figure it out where (on which) Node place the Pod
-- ContainerCreating: after the scheduler finds a Node then the Pod will be in ContainerCreating status. The required images are pulled from image registry
-- Running: after the container is started the pod will be in Running state until the program completes successfully or it is terminated
+- Pending: When the scheduler determines on which node to place the Pod.
+- ContainerCreating: After the scheduler assigns a node, the Pod enters the ContainerCreating status. The required images are pulled from the image registry.
+- Running: Once the container starts, the Pod remains in the Running state until the program completes successfully or is terminated.
 
 ### Pod Conditions
 
-It complement the Pod Status. It is an array of true/false.
+These complement the Pod Status. They are represented as an array of boolean values (true/false).
 
-The Ready condition indicates the the application inside the Pod is ready to accept user traffic.
-For example the application inside the pod could be a webserver or a database server. They can take several seconds/minutes to warm up.
+The Ready condition indicates that the application inside the Pod is ready to accept user traffic.
+For example, the application inside the Pod could be a web server or a database server, which may require several seconds or minutes to warm up.
 
-Why is it important?
-If the status of the Pod is Ready a kubernetes service can redirect traffic to the pod. But if the application inside in the container is not ready it can happen that a user request is redirected to a non-ready application thus affecting users.
+Why is this important?\
+If the Pod's status is Ready, a Kubernetes service can redirect traffic to it. However, if the application inside the container is not ready, a user request might be sent to an unprepared application, adversely affecting users.
 
 ## ReadinessProbe
 
@@ -68,4 +68,24 @@ spec:
         httpGet:
           port:
           path:
+```
+
+# Logs
+
+We can view the logs from a pod using the following command:
+
+```shell
+kubectl logs <PODNAME>
+```
+
+If we want to follow the logs (recieve new logs) we can use
+
+```shell
+kubectl logs -f <PODNAME>
+```
+
+If we have multiple containers in one pod we can use the following command
+
+```shell
+kubectl logs -f <PODNAME> <CONTAINERNAME>
 ```
