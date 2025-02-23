@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configmap-2
+data:
+  FROM: Frommessage from configmap2
+  MESSAGE: Messagemessage from configmap2

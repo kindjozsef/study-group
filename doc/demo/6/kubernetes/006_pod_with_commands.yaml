@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-6-cmd
+spec:
+  restartPolicy: "Never"
+  containers:
+    - image: kindjozsef/greeting2
+      name: greetingcontainer
+      commands: ["sleep"]
+      args: ["10"]

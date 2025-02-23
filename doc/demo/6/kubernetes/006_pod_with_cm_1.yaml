@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-6-cm-1
+spec:
+  restartPolicy: "Never"
+  containers:
+    - image: kindjozsef/greeting
+      name: greetingcontainer
+      env:
+        - name: MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: my-configmap-1
+              key: MESSAGE_IN_CONFIGMAP
+        - name: FROM
+          valueFrom:
+            configMapKeyRef:
+              name: my-configmap-1
+              key: FROM_IN_CONFIGMAP

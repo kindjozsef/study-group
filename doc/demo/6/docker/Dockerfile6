@@ -1,0 +1,3 @@
+From ubuntu
+ENV APP_COLOR rose
+ENTRYPOINT ["sh", "-c", "echo Background is $APP_COLOR"]

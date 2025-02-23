@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-task
+spec:
+  containers:
+    - image: kindjozsef/color
+      name: cm-task
+      env:
+        - name: APP_COLOR
+          value: pink
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dashboard-token
+data:
+  ca.crt: Y2EuY3J0IHZhbHVlIGVuY29kZWQK
+  token: dG9rZW4gdmFsdWUgZW5jb2RlZAo=
+  namespace: bmFtZXNwYWNlIHZhbHVlIGVuY29kZWQK
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-task
+spec:
+  containers:
+    - image: kindjozsef/secretdemo
+      name: secret-task

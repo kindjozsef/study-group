@@ -1,0 +1,3 @@
+From ubuntu
+ENTRYPOINT ["echo"]
+CMD ["Hello docker"]

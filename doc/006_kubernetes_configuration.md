@@ -151,8 +151,8 @@ spec:
         - name: <ENV_VARIABLE_1_NAME>
           valueFrom:
             secretKeyRef:
-              name: <CONFIGMAP_NAME>
-              key: <KEYNAME_IN_CONFIG_MAP>
+              name: <SECRET_NAME>
+              key: <KEYNAME_IN_SECRET_MAP>
 ```
 
 You can use all variables from a configmap/secret:

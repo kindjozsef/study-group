@@ -1,0 +1,2 @@
+From ubuntu
+ENTRYPOINT ["sh", "-c", "echo User: $DB_USER tries to access: $DB_HOST using password: $DB_PASSWORD"]
