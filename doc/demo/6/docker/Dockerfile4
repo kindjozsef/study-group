@@ -1,0 +1,4 @@
+From ubuntu
+ENV MESSAGE=DefaultMessage
+ENV FROM=DefaultFrom
+ENTRYPOINT ["sh", "-c", "echo Hello $MESSAGE from $FROM"]

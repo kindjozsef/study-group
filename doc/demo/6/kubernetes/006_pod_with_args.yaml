@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-6-env
+spec:
+  restartPolicy: "Never"
+  containers:
+    - image: kindjozsef/greeting
+      name: greetingcontainer
+      env:
+        - name: MESSAGE
+          value: World
+        - name: FROM
+          value: Jozsef
