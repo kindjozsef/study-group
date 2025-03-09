@@ -18,6 +18,59 @@ The security context is a set of security-related configurations applied to a po
 
 Capabilities are fine-grained Linux permissions that allow a process to perform specific privileged operations without granting full root privileges. Instead of giving a container complete root access, you can grant only the necessary capabilities required for its tasks.
 
+## Yaml
+
+### At Pod level
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper
+spec:
+  securityContext:
+    runAsUser: <USER_ID> # 0 == root
+    capabilities:
+      add: [""]
+      drop: [""]
+  containers:
+    - image: ubuntu
+      name: ubuntu-sleeper
+      command: ["sh", "-c", "sleep 3600"]
+```
+
+### At Container level
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper
+spec:
+  containers:
+    - image: ubuntu
+      name: ubuntu-sleeper
+      command: ["sh", "-c", "sleep 3600"]
+      securityContext:
+        runAsUser: <USER_ID> # 0 == root
+        capabilities:
+          add: [""]
+          drop: [""]
+```
+
+# Service Accounts
+
+There are two types of accounts in Kubernetes:
+
+- User accounts: used by humans for example an Administrator or a developer
+- Service accounts: used by an application to interact with the kubernetes cluster (for example jenkins, prometheus)
+
+## Creating service accounts
+
+```shell
+kubectl create serviceaccount <SA_NAME>
+```
+
 # Resource Requests and Limits
 
 ## Requests: Definition
