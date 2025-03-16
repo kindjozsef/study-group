@@ -25,4 +25,4 @@ spec:
       command: ["stress"]
       resources:
         limits:
-          memory: 20Mi
+          memory: 10Mi
