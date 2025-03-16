@@ -144,7 +144,20 @@ The effect can be either: NoSchedule, PreferNoSchedule or NoExecute
 kubectl taint nodes node1 key=value:NoSchedule
 ```
 
-This prevents pods from being scheduled on node1 unless they have a matching toleration.
+## How to untaint a node
+
+```shell
+kubectl taint nodes <NODE_NAME> <KEY>=<VALUE>:<EFFECT>-
+```
+
+The effect can be either: NoSchedule, PreferNoSchedule or NoExecute
+
+`Example`
+```shell
+kubectl taint nodes node1 key=value:NoSchedule-
+```
+
+This removes the taint from the node
 
 
 ## How to Tolerate a Taint in a Pod
