@@ -43,3 +43,19 @@
 5. The elephant pod runs a process that consumes 15Mi of memory. Increase the limit of the elephant pod to 20Mi.
 6. Inspect the status of POD. Make sure it's running
 7. Delete the elephant Pod.
+
+# Taints and tolerations
+
+0. Execute `minikube start --nodes 2 -p multinode-demo`
+1. How many nodes exist on the system?
+2. Do any taints exist on multinode-demo node?
+3. Create a taint on multinode-demo-m02 with key of spray, value of mortein and effect of NoSchedule
+4. Create a taint on multinode-demo with key of spray, value of mortein and effect of NoSchedule
+5. Create a new pod with the nginx image and pod name as mosquito
+6. What is the state of the POD?
+7. Why do you think the pod is in a pending state? (Application Error, POD Mosquito cannot tolerate taint Mortein, Image is not available)
+8. Create another pod named bee with the nginx image, which has a toleration set to the taint mortein.
+9. Notice the bee pod was scheduled despite the taint.
+10. Remove the taint on multinode-demo, which currently has the taint effect of NoSchedule
+11. What is the state of the pod mosquito now?
+12. Which node is the POD mosquito on now?
