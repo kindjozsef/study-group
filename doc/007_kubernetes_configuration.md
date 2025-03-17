@@ -30,9 +30,6 @@ metadata:
 spec:
   securityContext:
     runAsUser: <USER_ID> # 0 == root
-    capabilities:
-      add: [""]
-      drop: [""]
   containers:
     - image: ubuntu
       name: ubuntu-sleeper
