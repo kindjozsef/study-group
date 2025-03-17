@@ -2,15 +2,11 @@
 
 0. Execute `kubectl create -f 007_setup_sc.yaml`.
 1. What is the user used to execute the sleep process within the `ubuntu-sleeper` pod?
-2. Execute the following command inside the pod `date`. Now change the time with the following command `date -s "11 APR 2022 11:14:00"`. It will only work if you run the command as the superuser
-   `su`
-3. Edit the pod ubuntu-sleeper to run the sleep process with user ID 1010.
-4. Try to execute the following command inside the pod. `date -s "11 APR 2022 11:14:00"`.
-5. A Pod definition file named `007_multi-pod.yaml` is given. With what user are the processes in the web container started?
-6. With what user are the processes in the sidecar container started?
-7. Update pod ubuntu-sleeper to run as Root user and with the SYS_TIME capability.
-8. Try to execute the following command inside the pod. `date -s "11 APR 2022 11:14:00"`
-9. Now update the pod to also make use of the NET_ADMIN capability.
+2. Edit the pod ubuntu-sleeper to run the sleep process with user ID 1010.
+3. A Pod definition file named `007_multi-pod.yaml` is given. With what user are the processes in the web container started?
+4. With what user are the processes in the sidecar container started?
+5. Update pod ubuntu-sleeper to run as Root user and with the SYS_TIME capability.
+6. Now update the pod to also make use of the NET_ADMIN capability.
 
 # Service Accounts
 
