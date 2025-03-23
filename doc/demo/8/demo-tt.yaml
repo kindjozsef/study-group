@@ -5,9 +5,9 @@ metadata:
   name: bee
 spec:
   tolerations:
-    - key: "spray"
+    - key: "mykey"
       operator: "Equal"
-      value: "mortein"
+      value: "something"
       effect: "NoSchedule"
   containers:
     - image: nginx
