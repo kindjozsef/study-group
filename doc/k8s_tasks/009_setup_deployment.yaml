@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-dep
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: demo-dep
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-dep
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: demo-dep
+  template:
+    metadata:
+      labels:
+        app: demo-dep
+    spec:
+      containers:
+        - image: kodekloud/webapp-color:v1
+          name: webapp-color
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test
+spec:
+  containers:
+    - image: nginx
+      name: test
+      command:
+        - sh
+        - -c
+        - |
+          echo "for i in {1..35}; do output=\$(curl -s -f demo-dep/info) && echo "\$output" || echo \"error\";sleep 0.5; done" >> /tmp/script.sh
+          chmod +x /tmp/script.sh
+          sleep 3600

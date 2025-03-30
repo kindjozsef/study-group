@@ -5,6 +5,33 @@
 2. Demo using selectors
 3. Deployment Pod mapping
 
+# Recreate, RollingUpdate
+
+0. Create a deployment(Recreate) and show the history, version of the app and the replicaSets
+1. Create a second deployment(RollingUpdate) and show the history, version of the app and the replicaSets
+
+```shell
+kubectl expose deployment demo-rolling-dep --port=80 --target-port=8080 --type="NodePort" -n demo-strategy
+kubectl expose deployment demo-recreate-dep --port=80 --target-port=8080 --type="NodePort" -n demo-strategy
+minikube service demo-rolling-dep -p multinode -n demo-strategy
+minikube service demo-recreate-dep -p multinode -n demo-strategy
+kubectl rollout history deployment/demo-rolling-dep -n demo-strategy
+kubectl rollout history deployment/demo-recreate-dep -n demo-strategy
+kubectl get rs -n demo-strategy
+kubectl apply -f .\demo_recreate.yaml
+kubectl apply -f .\demo_rolling.yaml
+```
+
+2. Update the definition files and show the application and the history and with the describe command the deployments
+
+```shell
+kubectl describe deployment demo-recreate-dep -n demo-strategy
+kubectl describe deployment demo-rollout-dep -n demo-strategy
+```
+
+3. Show the history, version of the app and the ReplicaSets
+4. Go back to an earlier revision
+
 # Jobs, Cronjobs
 
 0. Docker container performing a simple math operation

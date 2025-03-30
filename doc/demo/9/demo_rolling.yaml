@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-rolling-dep
+  namespace: demo-strategy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demo-rolling-dep
+  template:
+    metadata:
+      labels:
+        app: demo-rolling-dep
+    spec:
+      containers:
+        - image: kodekloud/webapp-color:v1
+          name: webapp-color

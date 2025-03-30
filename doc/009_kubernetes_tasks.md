@@ -7,6 +7,22 @@
 4. A Deployment definition file is given 009_deployment-definition-9.yaml. Attempt to create the deployment; you will encounter an issue with the file. Try to fix it.
 5. Delete the labels-test namespace
 
+# Rolling Updates & Rollbacks in Deployments
+
+0. Execute `kubectl create -f 009_setup_deployment.yaml`
+1. We have deployed a simple web application. Inspect the PODs and the Services
+2. What is the current color of the web application? Execute `minikube service demo-dep` and check it from the browser
+3. Run the script named /tmp/curl-test.sh in `test` pod to send multiple requests to test the web application. Take a note of the output.
+4. Inspect the deployment and identify the number of PODs deployed by it
+5. What is the deployment strategy used for this deployment?
+6. If you were to upgrade the application now what would happen? (All PODs are taken down before upgrading any, PODs are upgraded few at a time)
+7. Let us try that. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v2 Do not delete and re-create the deployment. Only set the new image name for the existing deployment.
+8. Run the script curl-test.sh again. Notice the requests now hit both the old and newer versions. However none of them fail.
+9. Up to how many PODs can be down for upgrade at a time? Consider the current strategy settings and number of PODs - 4
+10. Change the deployment strategy to Recreate. Delete and re-create the deployment if necessary. Only update the strategy type for the existing deployment.
+11. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v3. Do not delete and re-create the deployment. Only set the new image name for the existing deployment.
+12. Run the script curl-test.sh again. Notice the failures. Wait for the new application to be ready. Notice that the requests now do not hit both the versions
+
 # Jobs
 
 1. A pod definition file named 009_throw-dice-pod.yaml is given. The image throw-dice randomly returns a value between 1 and 6. 6 is considered success and all others are failure. Try deploying the POD and view the POD logs for the generated number.

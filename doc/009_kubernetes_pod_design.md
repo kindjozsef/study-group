@@ -65,6 +65,33 @@ Example
 kubectl run my-pod --image=nginx --labels="env=prd,tier=frontend,bu=insurance"
 ```
 
+# Rolling Updates & Rollbacks in Deployments
+
+When we first creating a deployment it triggers a new rollout and a new revision (v1).
+Later when the deployment is updated it triggers a new rollout with a new revision (v2).
+
+To see the rollout history we can use the following command
+
+```shell
+kubectl rollout history deployment/<DEPLOYMENT_NAME>
+```
+
+There are two strategies to update a deployment: Recreate and RollingUpdate(default)
+
+With kubectl apply we can update our deployment
+
+```shell
+kubectl apply -f deployment-definition.yaml
+```
+
+With describe command we can see the difference between Recreate and RollingUpdate
+
+If we want to undo a change we can use the following command
+
+```shell
+kubectl rollout undo deployment/<DEPLOYMENT_NAME>
+```
+
 # Jobs and Cronjobs
 
 A container can serve different type of workloads. Until now we have discussed about databases, webservers. They are meant to run continously.
