@@ -6,3 +6,39 @@
 3. Identify the POD which is part of the prod environment, the finance BU and of frontend tier?
 4. A Deployment definition file is given 009_deployment-definition-9.yaml. Attempt to create the deployment; you will encounter an issue with the file. Try to fix it.
 5. Delete the labels-test namespace
+
+# Jobs
+
+1. A pod definition file named 009_throw-dice-pod.yaml is given. The image throw-dice randomly returns a value between 1 and 6. 6 is considered success and all others are failure. Try deploying the POD and view the POD logs for the generated number.
+2. Create a Job using this POD definition file or from the imperative command and look at how many attempts does it take to get a '6'.
+3. Monitor and wait for the job to succeed. Throughout this practice test remember to increase the 'BackOffLimit' to prevent the job from quitting before it succeeds.
+   Check out the documentation page about the BackOffLimit property.
+4. How many attempts did it take to complete the job?
+5. Update the job definition to run as many times as required to get 2 successful 6's
+   Delete existing job and create a new one with the given spec. Monitor and wait for the job to succeed.
+
+```yaml
+completions: 2
+backoffLimit: 25 # This is so the job does not quit before it succeeds.
+image: kodekloud/throw-dice
+```
+
+6. How many attempts did it take to complete the job this time?
+7. That took a while. Let us try to speed it up, by running upto 3 jobs in parallel. Update the job definition to run 3 jobs in parallel.
+
+```yaml
+completions: 3
+parallelism: 3
+backoffLimit: 25 # This is so the job does not quit before it succeeds.
+image: kodekloud/throw-dice
+```
+
+8. Let us now schedule that job to run at 21:30 hours every day.
+
+```yaml
+Schedule: 30 21 * * *
+completions: 3
+parallelism: 3
+backoffLimit: 25 # This is so the job does not quit before it succeeds.
+image: kodekloud/throw-dice
+```

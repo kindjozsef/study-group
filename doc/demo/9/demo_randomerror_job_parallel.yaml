@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: random-error-par-job
+spec:
+  completions: 10 # How many times we want to perform the job successfully
+  parallelism: 4 # How many pods we want to run parallel
+  backoffLimit: 50
+  template:
+    # Hier comes the Pod definition
+    spec:
+      containers:
+        - name: random-error
+          image: kodekloud/random-error
+      restartPolicy: Never

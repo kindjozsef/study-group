@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: math-pod
+spec:
+  # Default
+  restartPolicy: "Always"
+  containers:
+    - name: math-add-always
+      image: ubuntu
+      command: ["expr", "3", "+", "2"]

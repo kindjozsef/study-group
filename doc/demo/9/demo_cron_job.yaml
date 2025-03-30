@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-job
+spec:
+  # minute(0 - 59), hour(0 - 23), day of the month (1 - 31), month (1 - 12), day of the week (0 - 6, Sunday to Saturday)
+  # https://bradymholt.github.io/cron-expression-descriptor/
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    # the template of the job
+    spec:
+      completions: 3
+      parallelism: 3
+      # the template of the pod
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: my-container
+              image: ubuntu
+              command: ["sh", "-c", "echo hello world"]

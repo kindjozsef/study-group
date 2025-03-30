@@ -64,3 +64,73 @@ Example
 ```shell
 kubectl run my-pod --image=nginx --labels="env=prd,tier=frontend,bu=insurance"
 ```
+
+# Jobs and Cronjobs
+
+A container can serve different type of workloads. Until now we have discussed about databases, webservers. They are meant to run continously.
+But there are different kinds of workloads for example: analytics or batch processing, for example performing a computation. They are meant to perform a set of task and then finish.
+With jobs we can create multiple pods to process the data in parallel.
+Job is like a Deployment. A deployment is used to make sure that a given number of pods are always running.
+Job is used to create a given number of pods und run them until completion.
+
+## Creating a Job
+
+### Using yaml files
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: math-add-job
+spec:
+  completions: 3 # How many times we want to perform the job successfully
+  parallelism: 2 # How many pods we want to run parallel
+  template:
+    # Hier comes the Pod definition
+    spec:
+      containers:
+        - name: math-add
+          image: ubuntu
+          command: ["expr", "3", "+", "5"]
+      restartPolicy: Never
+```
+
+### Using imperative commands
+
+```shell
+kubectl create job <JOB_NAME> --image=<IMAGE_NAME> -- <COMMAND>
+```
+
+Example
+
+```shell
+kubectl create job add-job --image=ubuntu -- expr 5 + 2
+```
+
+## Cronjobs
+
+A cronjob is a job that can be scheduled
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-job
+spec:
+  # minute(0 - 59), hour(0 - 23), day of the month (1 - 31), month (1 - 12), day of the week (0 - 6, Sunday to Saturday)
+  # https://bradymholt.github.io/cron-expression-descriptor/
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    # the template of the job
+    spec:
+      completions: 3
+      parallelism: 3
+      # the template of the pod
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: my-container
+              image: ubuntu
+              command: ["sh", "-c", "echo hello world"]
+```
