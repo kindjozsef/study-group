@@ -42,3 +42,16 @@ parallelism: 3
 backoffLimit: 25 # This is so the job does not quit before it succeeds.
 image: kodekloud/throw-dice
 ```
+
+## Commands
+
+```shell
+# List all jobs
+kubectl get jobs
+# List all cronjobs
+kubectl get cronojobs
+# delete a job (and all pods)
+kubectl delete job <JOB_NAME>
+# delete a cronjob (and all jobs and pods)
+kubectl delete cronjob <CRON_JOB_NAME>
+```
