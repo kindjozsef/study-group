@@ -58,6 +58,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
+    storage: 100Mi
   hostPath:
     path: /tmp/data
 ```

@@ -19,13 +19,13 @@
 0. Execute `kubectl create -f 010_setup_persistence.yaml`
 1. The application stores logs at location /log/app.log. View the logs.
 2. If the POD was to get deleted now, would you be able to view these logs.
-3. Configure a volume to store these logs at /var/log/webapp on the host.
+3. Configure a volume to store these logs at /tmp on the host (in the node). You can check the file after you log in to minikube. (`minikube ssh`)
 4. Create a Persistent Volume with the given specification.
 
 - `Volume-Name`: pv-log
 - `Storage`: 100Mi
 - `Access Modes`: ReadWriteMany
-- `Host Path`: /pv/log
+- `Host Path`: /tmp
 - `Reclaim Policy`: Retain
 
 5. Let us claim some of that storage for our application. Create a Persistent Volume Claim with the given specification.
@@ -33,6 +33,7 @@
 - `Volume-Name`: claim-log-1
 - `Storage`: 50Mi
 - `Access Modes`: ReadWriteOnce
+- `storageClassName`: "" #should remain empty
 
 6. What is the state of the Persistent Volume Claim?
 
