@@ -1,0 +1,166 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-space
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: critical-space
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-wear
+  namespace: app-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp-wear
+  template:
+    metadata:
+      labels:
+        app: webapp-wear
+    spec:
+      containers:
+        - image: kodekloud/ecommerce:apparels
+          name: webapp-wear
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-wear-svc
+  namespace: app-space
+spec:
+  ports:
+    - port: 8888
+      targetPort: 8080
+  selector:
+    app: webapp-wear
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-watch
+  namespace: app-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp-watch
+  template:
+    metadata:
+      labels:
+        app: webapp-watch
+    spec:
+      containers:
+        - image: kodekloud/ecommerce:video
+          name: webapp-watch
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-watch-svc
+  namespace: app-space
+spec:
+  ports:
+    - port: 8888
+      targetPort: 8080
+  selector:
+    app: webapp-watch
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-food
+  namespace: app-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp-food
+  template:
+    metadata:
+      labels:
+        app: webapp-food
+    spec:
+      containers:
+        - image: kodekloud/ecommerce:food
+          name: webapp-food
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-food-svc
+  namespace: app-space
+spec:
+  ports:
+    - port: 8888
+      targetPort: 8080
+  selector:
+    app: webapp-food
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-pay
+  namespace: critical-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp-pay
+  template:
+    metadata:
+      labels:
+        app: webapp-pay
+    spec:
+      containers:
+        - image: kodekloud/ecommerce:pay
+          name: webapp-pay
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-pay-svc
+  namespace: critical-space
+spec:
+  ports:
+    - port: 8888
+      targetPort: 8080
+  selector:
+    app: webapp-pay
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress-resource
+  namespace: app-space
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: webapp-wear-svc
+                port:
+                  number: 8888
+            path: /wear
+            pathType: Exact
+          - backend:
+              service:
+                name: webapp-watch-svc
+                port:
+                  number: 8888
+            path: /watch
+            pathType: Exact
+status:
+  loadBalancer: {}
